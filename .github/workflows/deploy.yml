@@ -4,6 +4,8 @@ on:
   push:
     branches:
       - main
+    paths:
+      - '**'  # Optional: Only trigger if relevant files change
 
 jobs:
   build-and-deploy:
