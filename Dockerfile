@@ -32,4 +32,6 @@ EXPOSE 8000
 # CMD ["/app/entrypoint.sh"]
 
 # Run migrations and start server
-CMD ["sh", "-c", "python manage.py makemigrations && python manage.py migrate && nohup python manage.py runserver 0.0.0.0:8000 > server.log 2>&1 & tail -f server.log"]
+# CMD ["sh", "-c", "python manage.py makemigrations && python manage.py migrate && nohup python manage.py runserver 0.0.0.0:8000 > server.log 2>&1 & tail -f server.log"]
+CMD ["sh", "-c", "python manage.py makemigrations && python manage.py migrate && exec python manage.py runserver 0.0.0.0:8000"]
+
