@@ -23,11 +23,14 @@ RUN pip install --upgrade pip && pip install -r requirements.txt
 COPY . .
 
 # Copy and set up entrypoint script
-COPY entrypoint.sh /app/entrypoint.sh
-RUN chmod +x /app/entrypoint.sh
+# COPY entrypoint.sh /app/entrypoint.sh
+# RUN chmod +x /app/entrypoint.sh
 
-# Expose the port the app runs on
-EXPOSE 8000
+# # Expose the port the app runs on
+# EXPOSE 8000
 
-# Start the Django app
-CMD ["/app/entrypoint.sh"]
+# # Start the Django app
+# CMD ["/app/entrypoint.sh"]
+
+# Run migrations and start server
+CMD ["sh", "-c", "python manage.py makemigrations && python manage.py migrate && nohup python manage.py runserver 0.0.0.0:8000 > server.log 2>&1 & tail -f server.log"]
