@@ -26,7 +26,7 @@ COPY . .
 # RUN chmod +x /app/entrypoint.sh
 
 # # Expose the port the app runs on
-# EXPOSE 8000
+EXPOSE 8000
 
 # # Start the Django app
 # CMD ["/app/entrypoint.sh"]
