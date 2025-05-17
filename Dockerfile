@@ -28,10 +28,12 @@ COPY . .
 # # Expose the port the app runs on
 EXPOSE 8000
 
+RUN chmod +x /app/entrypoint.sh
+
 # # Start the Django app
-# CMD ["/app/entrypoint.sh"]
+CMD ["sh", "/app/entrypoint.sh"]
 
 # Run migrations and start server
 # CMD ["sh", "-c", "python manage.py makemigrations && python manage.py migrate && nohup python manage.py runserver 0.0.0.0:8000 > server.log 2>&1 & tail -f server.log"]
-CMD ["sh", "-c", "python manage.py makemigrations && python manage.py migrate && exec python manage.py runserver 0.0.0.0:8000"]
+# CMD ["sh", "-c", "python manage.py makemigrations && python manage.py migrate && exec python manage.py runserver 0.0.0.0:8000"]
 

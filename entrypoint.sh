@@ -12,5 +12,5 @@ echo "Applying migrations..."
 python manage.py makemigrations
 python manage.py migrate
 
-echo "Starting Django server..."
-exec python manage.py runserver 0.0.0.0:8000
+
+exec gunicorn product.wsgi:application --bind 0.0.0.0:8000 --workers 3
