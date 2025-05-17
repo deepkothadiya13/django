@@ -47,9 +47,6 @@ jobs:
             sudo systemctl start docker
           fi
 
-          # Add user to docker group (optional, may need re-login to take effect)
-          sudo usermod -aG docker $USER || true
-
           # Stop old container if running
           docker stop django-app || true
           docker rm django-app || true
