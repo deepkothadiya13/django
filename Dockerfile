@@ -12,14 +12,22 @@ WORKDIR /app
 RUN apt-get update && apt-get install -y \
     build-essential \
     libsqlite3-dev \
+    netcat \
     && rm -rf /var/lib/apt/lists/*
 
-# Copy requirements and install dependencies
+# Install Python dependencies
 COPY requirements.txt .
 RUN pip install --upgrade pip && pip install -r requirements.txt
 
-# Copy the Django project code
+# Copy project files
 COPY . .
 
-# Run migrations and start server
-CMD ["sh", "-c", "python manage.py makemigrations && python manage.py migrate && python manage.py runserver 0.0.0.0:8000"]
+# Copy and set up entrypoint script
+COPY entrypoint.sh /app/entrypoint.sh
+RUN chmod +x /app/entrypoint.sh
+
+# Expose the port the app runs on
+EXPOSE 8000
+
+# Start the Django app
+CMD ["/app/entrypoint.sh"]
